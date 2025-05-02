@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Bot</title>
+  <link rel="stylesheet" href="https://kit.fontawesome.com/a076d05399.css">
+  <style>
+    /* Estilos globales */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #525252;
+      color: white;
+      padding: 1rem 0;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+    }
+
+    .navigation ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .navigation ul li {
+      margin: 0 1rem;
+    }
+
+    .navigation ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .navigation ul li .search-icon input {
+      border: none;
+      padding: 0.5rem;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      padding: 1rem 0;
+    }
+
+    .footer-section {
+      text-align: center;
+    }
+
+    /* Estilos del chatbot */
+    #chatbot-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatbot-title {
+      text-align: center;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    #chatbot {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chatbot-messages {
+      height: 300px;
+      overflow-y: auto;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: white;
+      margin-bottom: 1rem;
+    }
+
+    .chatbot-input-container {
+      display: flex;
+    }
+
+    .chatbot-input {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .chatbot-send-button {
+      background: #525252;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .chatbot-send-button:hover {
+      background: #525252;
+    }
+
+    .user {
+      color: blue;
+      margin-bottom: 0.5rem;
+    }
+
+    .bot {
+      color: green;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="menu logo-nav">
+      <a href="index.html" class="logo">SALE ELECTRONIC</a>
+      <label class="menu-icon"><span class="fas fa-bars icomin"></span></label>
+      <nav class="navigation">
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li class="search-icon">
+            <input type="search" placeholder="Buscar">
+          </li>
+          <li class="car"><a href="carrito.html">
+            <svg class="bi bi-cart3" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="..."></path>
+            </svg></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div id="chatbot-container">
+      <h1 class="chatbot-title">SALE ELECTRONIC</h1>
+      <div id="chatbot">
+        <div id="messages" class="chatbot-messages"></div>
+        <div class="chatbot-input-container">
+          <input type="text" id="userInput" class="chatbot-input" placeholder="Escribe tu duda...">
+          <button id="sendButton" class="chatbot-send-button">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-section">
+    <div class="copyright-area">
+      <p>&copy; 2020, todos los derechos reservados <a href="index.html">SALE ELECTRONIC</a></p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+const respuestas = {
+  //Samsung s23
+    "samsung galaxy s23":"El Samsung Galaxy S23 tiene una pantalla de 6.1 pulgadas AMOLED 120Hz, procesador Snapdragon 8 Gen 2, triple cámara trasera de 50 MP, batería de 3900 mAh, 8 GB de RAM, almacenamiento de 128 o 256 GB, y sistema operativo Android 13.",
+    "galaxy s23":"El Samsung Galaxy S23 tiene una pantalla de 6.1 pulgadas AMOLED 120Hz, procesador Snapdragon 8 Gen 2, triple cámara trasera de 50 MP, batería de 3900 mAh, 8 GB de RAM, almacenamiento de 128 o 256 GB, y sistema operativo Android 13.",
+    "precio del samsung s23": "$ 24000",
+    "precio galaxy s23": "$ 24000",
+    "precio del s23": "$ 24000",
+    "precio del samsung galaxy s23": "$ 24000",
+    "cuanto cuesta el samsung s23": "$ 24000",
+    "cuanto cuesta el galaxy s23": "$ 24000",
+    "cuanto cuesta el s23": "$ 24000",
+    "cuanto cuesta el samsung galaxy s23": "$ 24000",
+    "caracteristicas del s23":"El Samsung Galaxy S23 tiene una pantalla de 6.1 pulgadas AMOLED 120Hz, procesador Snapdragon 8 Gen 2, triple cámara trasera de 50 MP, batería de 3900 mAh, 8 GB de RAM, almacenamiento de 128 o 256 GB, y sistema operativo Android 13.",
+    "que es s23":"El Samsung Galaxy S23 tiene una pantalla de 6.1 pulgadas AMOLED 120Hz, procesador Snapdragon 8 Gen 2, triple cámara trasera de 50 MP, batería de 3900 mAh, 8 GB de RAM, almacenamiento de 128 o 256 GB, y sistema operativo Android 13.",
+    "caracteristicas del samsung s23":"El Samsung Galaxy S23 tiene una pantalla de 6.1 pulgadas AMOLED 120Hz, procesador Snapdragon 8 Gen 2, triple cámara trasera de 50 MP, batería de 3900 mAh, 8 GB de RAM, almacenamiento de 128 o 256 GB, y sistema operativo Android 13.",
+    "caracteristicas del galaxy s23":"El Samsung Galaxy S23 tiene una pantalla de 6.1 pulgadas AMOLED 120Hz, procesador Snapdragon 8 Gen 2, triple cámara trasera de 50 MP, batería de 3900 mAh, 8 GB de RAM, almacenamiento de 128 o 256 GB, y sistema operativo Android 13.",
+  //Playstation 5
+    "playstation 5":"La PlayStation 5 es una consola de videojuegos de última generación con procesador AMD Ryzen Zen 2, GPU RDNA 2, soporte para gráficos 4K a 120 FPS, almacenamiento SSD ultra rápido de 825 GB, y compatibilidad con juegos retro de PS4.",
+    "ps5":"La PlayStation 5 es una consola de videojuegos de última generación con procesador AMD Ryzen Zen 2, GPU RDNA 2, soporte para gráficos 4K a 120 FPS, almacenamiento SSD ultra rápido de 825 GB, y compatibilidad con juegos retro de PS4.",
+    "precio de la playstation 5": "$ 12000",
+    "precio de la play 5": "$ 12000",
+    "precio ps5": "$ 12000",
+    "cuanto cuesta la playstation 5": "$ 12000",
+    "cuanto cuesta la ps5": "$ 12000",
+    "caracteristicas de la playstation 5":"La PlayStation 5 es una consola de videojuegos de última generación con procesador AMD Ryzen Zen 2, GPU RDNA 2, soporte para gráficos 4K a 120 FPS, almacenamiento SSD ultra rápido de 825 GB, y compatibilidad con juegos retro de PS4.",
+    "que es ps5":"La PlayStation 5 es una consola de videojuegos de última generación con procesador AMD Ryzen Zen 2, GPU RDNA 2, soporte para gráficos 4K a 120 FPS, almacenamiento SSD ultra rápido de 825 GB, y compatibilidad con juegos retro de PS4.",
+    "caracteristicas de la ps5":"La PlayStation 5 es una consola de videojuegos de última generación con procesador AMD Ryzen Zen 2, GPU RDNA 2, soporte para gráficos 4K a 120 FPS, almacenamiento SSD ultra rápido de 825 GB, y compatibilidad con juegos retro de PS4.",
+  //Nintendo
+    "nintendo switch oled":"La Nintendo Switch OLED tiene una pantalla OLED de 7 pulgadas, almacenamiento interno de 64 GB, soporte para juego portátil, acoplado y de mesa, batería de larga duración, altavoces mejorados, y compatibilidad con todos los juegos de la Nintendo Switch.",
+    "switch oled":"La Nintendo Switch OLED tiene una pantalla OLED de 7 pulgadas, almacenamiento interno de 64 GB, soporte para juego portátil, acoplado y de mesa, batería de larga duración, altavoces mejorados, y compatibilidad con todos los juegos de la Nintendo Switch.",
+    "precio de la nintendo switch oled": "$ 8500",
+    "precio nintendo": "$ 8500",
+    "cuanto cuesta la nintendo switch oled": "$ 8500",
+    "cuanto cuesta la switch oled": "$ 8500",
+    "caracteristicas de la nintendo switch oled":"La Nintendo Switch OLED tiene una pantalla OLED de 7 pulgadas, almacenamiento interno de 64 GB, soporte para juego portátil, acoplado y de mesa, batería de larga duración, altavoces mejorados, y compatibilidad con todos los juegos de la Nintendo Switch.",
+    "que es switch oled":"La Nintendo Switch OLED tiene una pantalla OLED de 7 pulgadas, almacenamiento interno de 64 GB, soporte para juego portátil, acoplado y de mesa, batería de larga duración, altavoces mejorados, y compatibilidad con todos los juegos de la Nintendo Switch.",
+    "caracteristicas de la switch oled":"La Nintendo Switch OLED tiene una pantalla OLED de 7 pulgadas, almacenamiento interno de 64 GB, soporte para juego portátil, acoplado y de mesa, batería de larga duración, altavoces mejorados, y compatibilidad con todos los juegos de la Nintendo Switch.",
+    //Alienware
+    "pc gamer r14":"La PC Gamer Alienware Aurora R14 incluye procesador AMD Ryzen 9 5900, tarjeta gráfica NVIDIA GeForce RTX 3080, 32 GB de RAM DDR4, almacenamiento SSD de 1 TB, y diseño avanzado con iluminación personalizable AlienFX.",
+    "alienware aurora r14":"La PC Gamer Alienware Aurora R14 incluye procesador AMD Ryzen 9 5900, tarjeta gráfica NVIDIA GeForce RTX 3080, 32 GB de RAM DDR4, almacenamiento SSD de 1 TB, y diseño avanzado con iluminación personalizable AlienFX.",
+    "pc gamer alienware":"La PC Gamer Alienware Aurora R14 incluye procesador AMD Ryzen 9 5900, tarjeta gráfica NVIDIA GeForce RTX 3080, 32 GB de RAM DDR4, almacenamiento SSD de 1 TB, y diseño avanzado con iluminación personalizable AlienFX.",
+    "pc gamer alienware aurora r14":"La PC Gamer Alienware Aurora R14 incluye procesador AMD Ryzen 9 5900, tarjeta gráfica NVIDIA GeForce RTX 3080, 32 GB de RAM DDR4, almacenamiento SSD de 1 TB, y diseño avanzado con iluminación personalizable AlienFX.",
+    "precio del pc gamer alienware aurora r14":"$ 65000",
+    "cuanto cuesta la pc gamer alienware aurora r14":"$ 65000",
+    "precio Alienware":"$ 65000",
+    "cuanto cuesta la Alienware":"$ 65000",
+    "precio del pc gamer Alienware aurora r14":"$ 65000",
+    "cuanto cuesta la Alienware aurora r14":"$ 65000",
+    "caracteristicas del pc gamer alienware aurora r14":"La PC Gamer Alienware Aurora R14 incluye procesador AMD Ryzen 9 5900, tarjeta gráfica NVIDIA GeForce RTX 3080, 32 GB de RAM DDR4, almacenamiento SSD de 1 TB, y diseño avanzado con iluminación personalizable AlienFX.",
+    "que es pc gamer Alienware aurora r14":"La PC Gamer Alienware Aurora R14 incluye procesador AMD Ryzen 9 5900, tarjeta gráfica NVIDIA GeForce RTX 3080, 32 GB de RAM DDR4, almacenamiento SSD de 1 TB, y diseño avanzado con iluminación personalizable AlienFX.",
+    //Reloj
+    "watch series 8":"El Apple Watch Series 8 tiene una pantalla Retina Always-On, sensor de temperatura, monitor de frecuencia cardíaca y oxígeno en sangre, resistencia al agua WR50, y compatibilidad con Apple Fitness+.",
+    "smartwatch":"El Apple Watch Series 8 tiene una pantalla Retina Always-On, sensor de temperatura, monitor de frecuencia cardíaca y oxígeno en sangre, resistencia al agua WR50, y compatibilidad con Apple Fitness+.",
+    "reloj smartwatch apple watch series 8":"El Apple Watch Series 8 tiene una pantalla Retina Always-On, sensor de temperatura, monitor de frecuencia cardíaca y oxígeno en sangre, resistencia al agua WR50, y compatibilidad con Apple Fitness+.",
+    "precio del reloj smartwatch apple watch series 8":"$ 10000",
+    "cuanto cuesta el reloj smartwatch apple watch series 8":"$ 10000",
+    "precio del smartwatch":"$ 10000",
+    "cuanto cuesta el smartwatch":"$ 10000",
+    "precio watch series 8":"$ 10000",
+    "cuanto cuesta el watch series 8":"$ 10000",
+    "caracteristicas del reloj smartwatch apple watch series 8":"El Apple Watch Series 8 tiene una pantalla Retina Always-On, sensor de temperatura, monitor de frecuencia cardíaca y oxígeno en sangre, resistencia al agua WR50, y compatibilidad con Apple Fitness+.",
+    "que es reloj smartwatch apple watch series 8":"El Apple Watch Series 8 tiene una pantalla Retina Always-On, sensor de temperatura, monitor de frecuencia cardíaca y oxígeno en sangre, resistencia al agua WR50, y compatibilidad con Apple Fitness+.",
+    "caracteristicas del smartwatch":"El Apple Watch Series 8 tiene una pantalla Retina Always-On, sensor de temperatura, monitor de frecuencia cardíaca y oxígeno en sangre, resistencia al agua WR50, y compatibilidad con Apple Fitness+.",
+    "que es watch series 8":"El Apple Watch Series 8 tiene una pantalla Retina Always-On, sensor de temperatura, monitor de frecuencia cardíaca y oxígeno en sangre, resistencia al agua WR50, y compatibilidad con Apple Fitness+.",
+    //Audifonos
+    "auriculares bose":"Los Bose Noise Cancelling 700 ofrecen cancelación de ruido ajustable, hasta 20 horas de batería, diseño ligero y cómodo, y compatibilidad con asistentes de voz como Alexa y Google Assistant.",
+    "precio de los bose noise":"$ 8000",
+    "cuanto cuestan bose":"$ 8000",
+    "caracteristicas de los auriculares bose noise cancelling 700":"Los Bose Noise Cancelling 700 ofrecen cancelación de ruido ajustable, hasta 20 horas de batería, diseño ligero y cómodo, y compatibilidad con asistentes de voz como Alexa y Google Assistant.",
+    "que son auriculares bose noise cancelling 700":"Los Bose Noise Cancelling 700 ofrecen cancelación de ruido ajustable, hasta 20 horas de batería, diseño ligero y cómodo, y compatibilidad con asistentes de voz como Alexa y Google Assistant.",
+    "auriculares bose noise cancelling 700":"Los Bose Noise Cancelling 700 ofrecen cancelación de ruido ajustable, hasta 20 horas de batería, diseño ligero y cómodo, y compatibilidad con asistentes de voz como Alexa y Google Assistant.",
+    "precio de los cancelling 700":"$ 8000",
+    "cuanto cuestan los cancelling 700":"$ 8000",
+    "caracteristicas de los bose":"Los Bose Noise Cancelling 700 ofrecen cancelación de ruido ajustable, hasta 20 horas de batería, diseño ligero y cómodo, y compatibilidad con asistentes de voz como Alexa y Google Assistant.",
+    "que son los bose noise ":"Los Bose Noise Cancelling 700 ofrecen cancelación de ruido ajustable, hasta 20 horas de batería, diseño ligero y cómodo, y compatibilidad con asistentes de voz como Alexa y Google Assistant.",
+    //tablet
+    "ipad pro":"El iPad Pro 12.9 tiene una pantalla Liquid Retina XDR de 12.9 pulgadas, procesador M2 de Apple, compatibilidad con Apple Pencil (2.ª gen), cámara trasera dual de 12 MP + LiDAR, hasta 2 TB de almacenamiento y conectividad 5G.",
+    "precio de la ipad pro":"$ 32000",
+    "cuanto cuesta la ipad pro 12.9":"$ 32000",
+    "caracteristicas de la tablet ipad pro 12.9":"El iPad Pro 12.9 tiene una pantalla Liquid Retina XDR de 12.9 pulgadas, procesador M2 de Apple, compatibilidad con Apple Pencil (2.ª gen), cámara trasera dual de 12 MP + LiDAR, hasta 2 TB de almacenamiento y conectividad 5G.",
+    "que es tablet ipad pro 12.9":"El iPad Pro 12.9 tiene una pantalla Liquid Retina XDR de 12.9 pulgadas, procesador M2 de Apple, compatibilidad con Apple Pencil (2.ª gen), cámara trasera dual de 12 MP + LiDAR, hasta 2 TB de almacenamiento y conectividad 5G.",
+    "caracteristicas de la ipad pro":"El iPad Pro 12.9 tiene una pantalla Liquid Retina XDR de 12.9 pulgadas, procesador M2 de Apple, compatibilidad con Apple Pencil (2.ª gen), cámara trasera dual de 12 MP + LiDAR, hasta 2 TB de almacenamiento y conectividad 5G.",
+    "que es la ipad pro 12.9":"El iPad Pro 12.9 tiene una pantalla Liquid Retina XDR de 12.9 pulgadas, procesador M2 de Apple, compatibilidad con Apple Pencil (2.ª gen), cámara trasera dual de 12 MP + LiDAR, hasta 2 TB de almacenamiento y conectividad 5G.",
+    //Iphone
+    "telefono iphone 15 pro":"El iPhone 15 Pro incluye una pantalla Super Retina XDR de 6.1 pulgadas, chip A17 Pro, cámara principal de 48 MP con teleobjetivo, diseño de titanio, carga rápida y USB-C, y sistema operativo iOS 17.",
+    "precio del telefono iphone 15 pro":"$ 28000",
+    "cuanto cuesta el telefono iphone 15 pro":"$ 28000",
+    "caracteristicas del telefono iphone 15 pro":"El iPhone 15 Pro incluye una pantalla Super Retina XDR de 6.1 pulgadas, chip A17 Pro, cámara principal de 48 MP con teleobjetivo, diseño de titanio, carga rápida y USB-C, y sistema operativo iOS 17.",
+    "que es telefono iphone 15 pro":"El iPhone 15 Pro incluye una pantalla Super Retina XDR de 6.1 pulgadas, chip A17 Pro, cámara principal de 48 MP con teleobjetivo, diseño de titanio, carga rápida y USB-C, y sistema operativo iOS 17.",
+    "iphone 15 pro":"El iPhone 15 Pro incluye una pantalla Super Retina XDR de 6.1 pulgadas, chip A17 Pro, cámara principal de 48 MP con teleobjetivo, diseño de titanio, carga rápida y USB-C, y sistema operativo iOS 17.",
+    "precio del iphone 15":"$ 28000",
+    "cuanto cuesta el iphone 15":"$ 28000",
+    "caracteristicas del telefono iphone 15 pro":"El iPhone 15 Pro incluye una pantalla Super Retina XDR de 6.1 pulgadas, chip A17 Pro, cámara principal de 48 MP con teleobjetivo, diseño de titanio, carga rápida y USB-C, y sistema operativo iOS 17.",
+    "que es telefono iphone 15 pro":"El iPhone 15 Pro incluye una pantalla Super Retina XDR de 6.1 pulgadas, chip A17 Pro, cámara principal de 48 MP con teleobjetivo, diseño de titanio, carga rápida y USB-C, y sistema operativo iOS 17.",
+    "caracteristicas del iphone 15":"El iPhone 15 Pro incluye una pantalla Super Retina XDR de 6.1 pulgadas, chip A17 Pro, cámara principal de 48 MP con teleobjetivo, diseño de titanio, carga rápida y USB-C, y sistema operativo iOS 17.",
+    "iphone 15 pro":"El iPhone 15 Pro incluye una pantalla Super Retina XDR de 6.1 pulgadas, chip A17 Pro, cámara principal de 48 MP con teleobjetivo, diseño de titanio, carga rápida y USB-C, y sistema operativo iOS 17.",
+    //Lenovo
+    "pc lenovo thinkpad x1 carbon":"La Lenovo ThinkPad X1 Carbon cuenta con procesador Intel Core i7 de 12.ª generación, pantalla de 14 pulgadas 4K UHD, 16 GB de RAM, SSD de 512 GB, y diseño ultraligero y resistente para negocios.",
+    "precio lenovo pc":"$ 42000",
+    "cuanto cuesta la pc lenovo thinkpad x1 carbon":"$ 42000",
+    "caracteristicas de la pc lenovo thinkpad x1 carbon":"La Lenovo ThinkPad X1 Carbon cuenta con procesador Intel Core i7 de 12.ª generación, pantalla de 14 pulgadas 4K UHD, 16 GB de RAM, SSD de 512 GB, y diseño ultraligero y resistente para negocios.",
+    "que es pc lenovo thinkpad x1 carbon":"La Lenovo ThinkPad X1 Carbon cuenta con procesador Intel Core i7 de 12.ª generación, pantalla de 14 pulgadas 4K UHD, 16 GB de RAM, SSD de 512 GB, y diseño ultraligero y resistente para negocios.",
+    "lenovo thinkpad":"La Lenovo ThinkPad X1 Carbon cuenta con procesador Intel Core i7 de 12.ª generación, pantalla de 14 pulgadas 4K UHD, 16 GB de RAM, SSD de 512 GB, y diseño ultraligero y resistente para negocios.",
+    "precio lenovo thinkpad":"$ 42000",
+    "cuanto cuesta la lenovo thinkpad":"$ 42000",
+    "caracteristicas de la lenovo":"La Lenovo ThinkPad X1 Carbon cuenta con procesador Intel Core i7 de 12.ª generación, pantalla de 14 pulgadas 4K UHD, 16 GB de RAM, SSD de 512 GB, y diseño ultraligero y resistente para negocios.",
+    "que es pc lenovo ":"La Lenovo ThinkPad X1 Carbon cuenta con procesador Intel Core i7 de 12.ª generación, pantalla de 14 pulgadas 4K UHD, 16 GB de RAM, SSD de 512 GB, y diseño ultraligero y resistente para negocios.",
+    //camara canon
+    "canon eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+    "precio de la camara canon eos r5":"$ 120000",
+    "cuanto cuesta la camara canon eos r5":"$ 120000",
+    "caracteristicas de la camara canon eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+    "que es camara canon eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+    "camara eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+    "precio de la canon eos r5":"$ 120000",
+    "cuanto cuesta la camara canon eos r5":"$ 120000",
+    "caracteristicas de la camara canon eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+    "que es camara canon eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+    "camara canon eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+    "precio de la eos r5":"$ 120000",
+    "cuanto cuesta la eos r5":"$ 120000",
+    "caracteristicas de la eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+    "que es canon eos r5":"La Canon EOS R5 tiene sensor Full Frame de 45 MP, grabación de video 8K, sistema de enfoque Dual Pixel CMOS AF II, estabilización de imagen en el cuerpo, y conectividad inalámbrica avanzada.",
+  };
+
+const messages = document.getElementById('messages');
+const userInput = document.getElementById('userInput');
+const sendButton = document.getElementById('sendButton');
+
+function agregarMensaje(texto, clase) {
+    const mensaje = document.createElement('div');
+    mensaje.textContent = texto;
+    mensaje.className = clase;
+    messages.appendChild(mensaje);
+    messages.scrollTop = messages.scrollHeight; // Desplazar hacia el último mensaje
+}
+
+function procesarPregunta(pregunta) {
+    pregunta = pregunta.toLowerCase();
+    for (let clave in respuestas) {
+        if (pregunta.includes(clave)) {
+            return respuestas[clave];
+        }
+    }
+    return "Lo siento, no entiendo tu pregunta. Por favor, intenta nuevamente.";
+}
+
+sendButton.addEventListener('click', () => {
+    const pregunta = userInput.value.trim();
+    if (pregunta) {
+        agregarMensaje("Tú: " + pregunta, "user");
+        const respuesta = procesarPregunta(pregunta);
+        agregarMensaje("Chatbot: " + respuesta, "bot");
+        userInput.value = "";
+    }
+});
+
+userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendButton.click();
+    }
+});
+
+  </script>
+</body>
+</html>

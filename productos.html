@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <header>
+      <div class="menu logo-nav">
+        <a href="index.html" class="logo">SALE ELECTRONIC</a>
+        <label class="menu-icon"><span class="fas fa-bars icomin"></span></label>
+        <nav class="navigation">
+          <ul>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li class="search-icon">
+              <input type="search" placeholder="Buscar">
+              <label class="icon">
+                <span class="fas fa-search"></span>
+              </label>
+            </li>
+            <li class="car" >
+              <svg class="bi bi-cart3" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+              </svg>
+                <div id="carrito" class="dropdown-menu">
+                  <table id="lista-carrito" class="table">
+                      <thead>
+                          <tr>
+                              <th>Imagen</th>
+                              <th>Nombre</th>
+                              <th>Precio</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody></tbody>
+                  </table>
+
+                  <a href="#" id="vaciar-carrito" class="button-vaciar">Vaciar Carrito</a>
+                  <a href="#" id="procesar-pedido" class="button-pedido">Procesar Compra</a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+
+    <main>
+
+      <div class="modal" id="modal">
+        <div class="modal-content">
+          <img src="" alt="" class="modal-img" id="modal-img">
+        </div>
+        <div class="modal-boton" id="modal-boton">X</div>
+      </div><br><br>
+      <div>
+      <h2 style="text-align: center; font-weight: bold;" class="logos">Encuentra las mejores marcas</h2>
+    </div>
+    <div style="text-align: center;">
+      <img src="assets/img/Captura de pantalla 2024-12-08 153226.png" class="img-fluid" alt="..." width="900">
+  </div>
+  
+
+      <div class="container-productos" id="lista-productos">
+
+        <div class="card">
+          <img src="assets/img/s23.jpg" class="card-img">
+          <h5>Teléfono Samsung Galaxy S23</h5>
+          <p>SKU: TEL000001</p>
+          <p>S/.<small class="precio">24000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="1">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/ps5.jpg" class="card-img">
+          <h5>Consola PlayStation 5</h5>
+          <p>SKU: CON000002</p>
+          <p>S/.<small class="precio">12000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="2">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/pc.jpg" class="card-img">
+          <h5>PC Gamer Alienware Aurora R14</h5>
+          <p>SKU: PCG000003</p>
+          <p>S/.<small class="precio">32000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="3">Comprar</a>
+        </div>
+
+        <div class="card">
+          <img src="assets/img/reloj.jpg" class="card-img">
+          <h5>Reloj Smartwatch Apple Watch Series 8</h5>
+          <p>SKU: RWAP000004</p>
+          <p>S/.<small class="precio">7000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="4">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/audifono.jpg" class="card-img">
+          <h5>Auriculares Bose Noise Cancelling 700</h5>
+          <p>SKU: AUR000005</p>
+          <p>S/.<small class="precio">6000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="5">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/tablet.jpg" class="card-img">
+          <h5>Tablet iPad Pro 12.9</h5>
+          <p>SKU: TBL000006</p>
+          <p>S/.<small class="precio">4999</small></p>
+          <a href="#" class="button agregar-carrito" data-id="6">Comprar</a>
+        </div>
+
+        <div class="card">
+          <img src="assets/img/iphone.jpg" class="card-img">
+          <h5>Teléfono iPhone 15 Pro</h5>
+          <p>SKU: TEL000007</p>
+          <p>S/.<small class="precio">19000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="7">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/consola.jpg" class="card-img">
+          <h5>Consola Nintendo Switch OLED</h5>
+          <p>SKU: CON000008</p>
+          <p>S/.<small class="precio">5500</small></p>
+          <a href="#" class="button agregar-carrito" data-id="8">Comprar</a>
+        </div>
+        <div>
+          <img src="assets/img/publicidad.avif" class="img-fluid" alt="..." width="1100">
+        </div>
+        <div class="card">
+          <img src="assets/img/pcl.jpg" class="card-img">
+          <h5>PC Lenovo ThinkPad X1 Carbon</h5>
+          <p>SKU: PCG000009</p>
+          <p>S/.<small class="precio">13000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="9">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/camara.jpg" class="card-img">
+          <h5>Cámara Canon EOS R5</h5>
+          <p>SKU: CAM000010</p>
+          <p>S/.<small class="precio">10000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="10">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/proyector.jpg" class="card-img">
+          <h5>Proyector Epson PowerLite X51</h5>
+          <p>SKU: PROJ000011</p>
+          <p>S/.<small class="precio">7799</small></p>
+          <a href="#" class="button agregar-carrito" data-id="11">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/drone.jpg" class="card-img">
+          <h5>Drone DJI Mini 3 Pro</h5>
+          <p>SKU: DRN000012</p>
+          <p>S/.<small class="precio">12000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="12">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/monitor.jpg" class="card-img">
+          <h5>Monitor LG UltraGear 27GP850</h5>
+          <p>SKU: MON000013</p>
+          <p>S/.<small class="precio">15000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="13">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/impresora.jpg" class="card-img">
+          <h5>Impresora HP Smart Tank 530</h5>
+          <p>SKU: IMP000014</p>
+          <p>S/.<small class="precio">6500</small></p>
+          <a href="#" class="button agregar-carrito" data-id="14">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/disco.jpg" class="card-img">
+          <h5>Disco SSD Samsung T7 2TB</h5>
+          <p>SKU: SSD000015</p>
+          <p>S/.<small class="precio">1000</small></p>
+          <a href="#" class="button agregar-carrito" data-id="15">Comprar</a>
+        </div>
+        <div class="card">
+          <img src="assets/img/router.jpg" class="card-img">
+          <h5>Router TP-Link Archer AX50</h5>
+          <p>SKU: RTR000016</p>
+          <p>S/.<small class="precio">900</small></p>
+          <a href="#" class="button agregar-carrito" data-id="16">Comprar</a>
+        </div>
+      </div>
+</main>
+
+  
+
+<footer class="footer-section">
+  <div class="copyright-area">
+      <div class="container-footer">
+          <div class="row-footer">
+              <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                  <div class="copyright-text">
+                      <p>Copyright &copy; 2020, todos los derechos reservados <a href="index.html">SALE ELECTRONIC</a></p>
+                  </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                  <div class="footer-menu">
+                      <ul>
+                          <li><a href="nosotros.html">Nosotros</a></li>
+                          <li><a href="productos.html">Productos</a></li>
+                          <li><a href="contacto.html">Contacto</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer> 
+
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script  src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script  src="assets/js/scripts.js"></script>
+    <script src="assets/js/carrito.js"></script>
+    <script src="assets/js/pedido.js"></script>
+    <script src="assets/js/compra.js"></script>
+</body>
+</html>
